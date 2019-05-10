@@ -20,7 +20,7 @@ echo '
      awk -F"'" '/replaced by a script/ {print "SCRIPTWHITELIST="$2}' $LOG
 echo '
      Allow processes using deleted files ("deleted_files" test):'
-     awk '/Process: / {print "ALLOWPROCDELFILE="$3}' $LOG | sort -u
+     grep -i 'following processes are using deleted files' /var/log/rkhunter.log -A1| awk '/Process: / {print "ALLOWPROCDELFILE="$3}'| sort -u 
 echo '
      Allow Xinetd services:'
      awk '/Found enabled xinetd service/ {print $NF}' $LOG |
