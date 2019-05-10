@@ -39,3 +39,6 @@ echo '
      Allow hidden files ("filesystem" test):'
      awk '/Warning: Hidden file/ {print "ALLOWHIDDENFILE="$6}' $LOG |
       sed -e "s|:$||g"
+echo '
+     Allow shared memory segments files ("ipc_shared_mem" test):'
+     awk '/Process: / {print "ALLOWIPCPROC="$3}' $LOG | sort -u
