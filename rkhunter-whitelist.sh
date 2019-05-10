@@ -41,4 +41,4 @@ echo '
       sed -e "s|:$||g"
 echo '
      Allow shared memory segments files ("ipc_shared_mem" test):'
-     awk '/Process: / {print "ALLOWIPCPROC="$3}' $LOG | sort -u
+     grep -i 'shared memory segments have been found' /var/log/rkhunter.log -A1| awk '/Process: / {print "ALLOWIPCPROC="$3}'| sort -u
