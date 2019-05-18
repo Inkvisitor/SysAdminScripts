@@ -1,7 +1,16 @@
 #!/bin/sh
 # http://rkhunter.cvs.sourceforge.net/viewvc/rkhunter/rkhunter/files/FAQ
-LOG1=/var/log/rkhunter.log
-LOG2=/var/log/rkhunter/rkhunter.log
+
+LOGPATH1=/var/log/rkhunter.log
+LOGPATH2=/var/log/rkhunter/rkhunter.log
+if [ -f $LOGPATH1 ]; then
+     LOG1=$LOGPATH1
+elif [ -f $LOGPATH2 ]; then
+     LOG1=$LOGPATH2
+else
+     echo "No rkhunter log file found! Exiting..."
+     exit 1
+fi
 LOG="${LOG1:-$LOG2}"
 cat <<EOF
 6. WHITELISTING EXAMPLES
