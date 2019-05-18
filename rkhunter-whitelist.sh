@@ -1,6 +1,6 @@
 #!/bin/sh
 # http://rkhunter.cvs.sourceforge.net/viewvc/rkhunter/rkhunter/files/FAQ
-LOG=/var/log/rkhunter.log
+LOG=(/var/log/rkhunter/rkhunter.log || /var/log/rkhunter.log)
 cat <<EOF
 6. WHITELISTING EXAMPLES
 ========================
@@ -20,7 +20,7 @@ echo '
      awk -F"'" '/replaced by a script/ {print "SCRIPTWHITELIST="$2}' $LOG
 echo '
      Allow processes using deleted files ("deleted_files" test):'
-     grep -i 'following processes are using deleted files' /var/log/rkhunter.log -A1| awk '/Process: / {print "ALLOWPROCDELFILE="$3}'| sort -u 
+     grep -i 'following processes are using deleted files' $LOG -A1| awk '/Process: / {print "ALLOWPROCDELFILE="$3}'| sort -u 
 echo '
      Allow Xinetd services:'
      awk '/Found enabled xinetd service/ {print $NF}' $LOG |
@@ -41,4 +41,4 @@ echo '
       sed -e "s|:$||g"
 echo '
      Allow shared memory segments files ("ipc_shared_mem" test):'
-     grep -i 'shared memory segments have been found' /var/log/rkhunter.log -A1| awk '/Process: / {print "ALLOWIPCPROC="$3}'| sort -u
+     grep -i 'shared memory segments have been found' $LOG -A1| awk '/Process: / {print "ALLOWIPCPROC="$3}'| sort -u
