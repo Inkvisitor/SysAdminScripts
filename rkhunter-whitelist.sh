@@ -6,7 +6,7 @@ LOGPATH2=/var/log/rkhunter/rkhunter.log
 if [ -f $LOGPATH1 ]; then
      LOG1=$LOGPATH1
 elif [ -f $LOGPATH2 ]; then
-     LOG1=$LOGPATH2
+     LOG2=$LOGPATH2
 else
      echo "No rkhunter log file found! Exiting..."
      exit 1
