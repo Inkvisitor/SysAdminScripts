@@ -1,6 +1,8 @@
 #!/bin/sh
 # http://rkhunter.cvs.sourceforge.net/viewvc/rkhunter/rkhunter/files/FAQ
-LOG=(/var/log/rkhunter/rkhunter.log | /var/log/rkhunter.log)
+LOG1=/var/log/rkhunter.log
+LOG2=/var/log/rkhunter/rkhunter.log
+LOG="${LOG1:-$LOG2}"
 cat <<EOF
 6. WHITELISTING EXAMPLES
 ========================
