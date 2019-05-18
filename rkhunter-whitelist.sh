@@ -34,8 +34,9 @@ echo '
      grep -i 'following processes are using deleted files' $LOG -A1| awk '/Process: / {print "ALLOWPROCDELFILE="$3}'| sort -u 
 echo '
      Allow Xinetd services:'
-     awk '/Found enabled xinetd service/ {print $NF}' $LOG |
-      xargs -iX grep -e "server[[:blank:]]" 'X' | awk '{print "XINETD_ALLOWED_SVC="$NF}'
+     awk '/Found enabled xinetd service/ {print $NF}' $LOG \
+     | xargs -iX egrep "^[[:blank:]]server[[:blank:]]" 'X' \
+     | awk '{print "XINETD_ALLOWED_SVC=\""$NF"\""}'| sort -u
 echo '
      Allow packet capturing applications ("packet_cap_apps" test):'
      awk -F"'" '/is listening on the network/ {print "ALLOWPROCLISTEN="$2}' $LOG
