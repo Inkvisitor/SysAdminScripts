@@ -1,17 +1,15 @@
 #!/bin/sh
 # http://rkhunter.cvs.sourceforge.net/viewvc/rkhunter/rkhunter/files/FAQ
-
-LOGPATH1=/var/log/rkhunter.log
-LOGPATH2=/var/log/rkhunter/rkhunter.log
-if [ -f $LOGPATH1 ]; then
-     LOG1=$LOGPATH1
-elif [ -f $LOGPATH2 ]; then
-     LOG2=$LOGPATH2
+DEFAULTLOG=/var/log/rkhunter.log
+if [ -f $DEFAULTLOG ]; then
+        LOG1=$DEFAULTLOG
 else
-     echo "No rkhunter log file found! Exiting..."
-     exit 1
+    	LOG1=/var/log/rkhunter/rkhunter.log
+#       echo $LOG1
 fi
-LOG="${LOG1:-$LOG2}"
+LOG=${LOG1:=$DEFAULTLOG}
+echo "LOG = $LOG"
+
 cat <<EOF
 6. WHITELISTING EXAMPLES
 ========================
