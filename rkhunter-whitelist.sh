@@ -50,5 +50,8 @@ echo '
      awk '/Warning: Hidden file/ {print "ALLOWHIDDENFILE="$6}' $LOG |
       sed -e "s|:$||g"
 echo '
+      Allow ports being used:'
+      awk '/Warning: Network TCP port/ {print "PORT_PATH_WHITELIST=$11:TCP:$6"}' $LOG       
+echo '
      Allow shared memory segments files ("ipc_shared_mem" test):'
      grep -i 'shared memory segments have been found' $LOG -A1| awk '/Process: / {print "ALLOWIPCPROC="$3}'| sort -u
